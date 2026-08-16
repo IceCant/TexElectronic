@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import handler from "../api/[...path].mjs";
+import handler from "../api/index.mjs";
 
 async function request(path,options) {
   return handler.fetch(new Request(`https://texelectronic-demo.vercel.app${path}`,options));
@@ -34,4 +34,11 @@ test("Vercel demo API accepts a web order",async()=>{
   assert.equal(response.status,201);
   assert.equal(order.status,"NEW");
   assert.match(order.reference,/^WEB-/);
+});
+
+test("Vercel SPA rewrite preserves API routes",async()=>{
+  const response = await handler.fetch(new Request("https://texelectronic-demo.vercel.app/api/index?path=state"));
+  assert.equal(response.status,200);
+  assert.match(response.headers.get("content-type"),/^application\/json/);
+  assert.equal((await response.json()).products.length,12);
 });

@@ -32,7 +32,8 @@ function matchPath(pathname,pattern) {
 
 async function routeRequest(request) {
   const url = new globalThis.URL(request.url);
-  const { pathname } = url;
+  const rewrittenPath = url.searchParams.get("path")?.replace(/^\/+/,"");
+  const pathname = rewrittenPath ? `/api/${rewrittenPath}` : url.pathname;
   const { method } = request;
 
   if (method === "GET" && pathname === "/api/state") return jsonResponse(store.getState());
