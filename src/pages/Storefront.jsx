@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Link, Navigate, Route, Routes, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
-  ArrowLeft, ArrowRight, CheckCircle, ClockCountdown, CurrencyDollar,
-  Headset, MagnifyingGlass, Minus, Package, Plus, ShieldCheck, ShoppingCart, Storefront, Trash, Truck,
+  ArrowLeft, ArrowRight, CheckCircle, ClockCountdown, MagnifyingGlass,
+  Minus, Package, Plus, ShoppingCart, Storefront, Trash, Truck,
 } from "@phosphor-icons/react";
 import { formatMoney } from "../data.jsx";
 
@@ -108,7 +108,7 @@ function StoreHeader() {
   const { cartLines,style,selectStyle } = useStore();
   const itemCount = cartLines.reduce((sum,line) => sum + line.quantity,0);
   return <header className="store-header">
-    <Link className="store-logo" to="/store"><span><Storefront weight="duotone"/></span><strong>Tex Electronic<small>Components that keep ideas moving</small></strong></Link>
+    <Link className="store-logo" to="/store"><span><Storefront weight="duotone"/></span><strong>Tex Electronic</strong></Link>
     <nav><Link to="/store">Products</Link><Link to="/store/track">Track order</Link><a href="#support">Help & contact</a></nav>
     <div className="store-style-switch" aria-label="Store style"><span>Style</span>{[1,2,3].map(value=><button className={style===value?"active":""} aria-label={`Choose style ${value}`} aria-pressed={style===value} onClick={()=>selectStyle(value)} key={value}>{value}</button>)}</div>
     <Link className="store-cart-link" to="/store/cart"><ShoppingCart weight="bold"/><span>Cart</span>{itemCount>0&&<b>{itemCount}</b>}</Link>
@@ -146,8 +146,6 @@ function CataloguePage() {
   });
 
   return <StoreLayout><main className="store-main">
-    <section className="store-hero"><div><span className="store-kicker">Phnom Penh electronics supply</span><h1>Find the right component.<br/>Know it’s available.</h1><p>Browse live availability, compare specifications and order for pickup or delivery.</p><div className="store-hero-actions"><a href="#catalogue">Browse components <ArrowRight/></a><Link to="/store/track">Track an order</Link></div></div><div className="store-hero-stat"><ShieldCheck weight="duotone"/><strong>Live shop inventory</strong><span>Availability updates when orders are confirmed.</span></div></section>
-    <section className="store-trust-strip" aria-label="Why order from Tex Electronic"><div><ShieldCheck/><span><strong>Live availability</strong><small>Shared with our shop floor</small></span></div><div><CurrencyDollar/><span><strong>Volume pricing</strong><small>Automatic quantity breaks</small></span></div><div><Headset/><span><strong>Local confirmation</strong><small>Our team checks every order</small></span></div><div><Truck/><span><strong>Pickup or delivery</strong><small>Choose at checkout</small></span></div></section>
     <div className="store-search"><MagnifyingGlass/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Search part number, value, category or brand…"/><span>{visibleProducts.length} products</span></div>
     <div className="store-categories">{categories.map(item=><button className={category===item?"active":""} aria-pressed={category===item} onClick={()=>setCategory(item)} key={item}>{item}</button>)}</div>
     <section className="store-grid" id="catalogue">{visibleProducts.map(product => {

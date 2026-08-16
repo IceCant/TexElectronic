@@ -18,6 +18,18 @@ The customer catalogue is available at [http://localhost:4173/store](http://loca
 
 The development server owns both the Vite frontend and the local `/api` endpoints. SQLite data is stored at `data/texelectronic.sqlite`.
 
+## Deploy the client demo to Vercel
+
+The repository includes `vercel.json`, SPA deep-link routing, a Vercel Function for `/api/*`, and a branded favicon.
+
+```bash
+npx vercel
+```
+
+Use the detected Vite settings. The configured build command is `npm run build:vercel` and the output directory is `dist/client`.
+
+The Vercel demo API stores seeded SQLite data in the function's temporary filesystem. It is suitable for a first-impression demo, but data can reset when the function instance is recycled and separate instances may not share mutations. Connect a durable database before using the deployment for real shop operations.
+
 ## Demo identity
 
 The local pilot is pre-authenticated as:
@@ -48,7 +60,7 @@ Authentication and production sessions remain an explicit deployment task; autho
 
 ## Product photography
 
-Every seeded SKU now has its own transparent product packshot under `public/assets/products/`. Individual photos can be downloaded from the public product-detail page, and the complete set is available from the storefront footer as `texelectronic-product-packshots.zip`.
+Every seeded SKU has its own transparent product packshot under `public/assets/products/`. The public storefront displays these packshots as product references without exposing customer-facing download controls.
 
 The catalogue packshots were generated for this prototype in a consistent neutral studio style. Replace them with manufacturer-authorized photography before a final commercial launch if exact physical representation is required.
 
@@ -90,12 +102,12 @@ npm run check      # all checks above
 
 ## Current scope boundaries
 
-- The demo API and SQLite database run through the Vite development server. The static Sites worker does not provide durable hosted database writes.
+- The local API and SQLite database run through the Vite development server. The Vercel demo function supports the same endpoints with temporary, non-durable SQLite data; the static Sites worker does not provide hosted database writes.
 - Camera barcode capture is represented by an exact-match scanner modal/manual fallback; USB and Bluetooth scanners work as keyboard input.
 - Product receive, damage/loss, recount, reject, and edit actions have their intended UI entry points; transfer, sale, web order, count creation, approval, and product save are the fully persistent M1 mutations.
 - Public catalogue and tracking responses exclude cost price, internal rack/location data, delivery addresses, notes, and phone numbers. Tracking requires both the order reference and matching phone number.
 - Web orders reserve stock atomically and support explicit New → Confirmed → Ready → Completed transitions. Cancellation safely restores reserved inventory. Online card payment remains a later production phase.
-- The catalogue includes one optimized, downloadable packshot per seeded product. A production media library, upload flow, and manufacturer asset approvals remain a later phase.
+- The catalogue includes one optimized packshot per seeded product. A production media library, upload flow, and manufacturer asset approvals remain a later phase.
 - Secure login, role enforcement middleware, and production PostgreSQL are the next backend-hardening phase.
 
 See [docs/architecture.md](docs/architecture.md), [docs/domain-rules.md](docs/domain-rules.md), and [design-qa.md](design-qa.md).
