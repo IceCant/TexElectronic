@@ -1,0 +1,23 @@
+{
+  "id": "/staff",
+  "name": "Tex Electronic Staff",
+  "short_name": "Tex Staff",
+  "description": "Mobile shop-floor access to Tex Electronic operations.",
+  "start_url": "/staff",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#071524",
+  "theme_color": "#071524",
+  "categories": ["business", "productivity"],
+  "shortcuts": [
+    { "name": "Point of sale", "short_name": "POS", "url": "/pos" },
+    { "name": "Product search", "short_name": "Search", "url": "/search" },
+    { "name": "Inventory", "short_name": "Inventory", "url": "/inventory" }
+  ],
+  "icons": [
+    { "src": "/icons/staff-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/staff-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/staff-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,6 +1,6 @@
 import { useEffect,useMemo,useRef,useState } from "react";
 import { Barcode,CaretDown,CheckCircle,Command,Crosshair,Eye,MagnifyingGlass,MapPin,SlidersHorizontal,Stack } from "@phosphor-icons/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 import { formatMoney,useData } from "../data.jsx";
 import { ProductImage,RackMap,ScannerModal } from "../components/AppShell.jsx";
 
@@ -25,8 +25,8 @@ function scoreProduct(product,query) {
 }
 
 export function SearchPage() {
-  const { state }=useData(); const navigate=useNavigate();
-  const [query,setQuery]=useState("220uf 25v"); const [selectedIndex,setSelectedIndex]=useState(0); const [showLocator,setShowLocator]=useState(true); const [scanOpen,setScanOpen]=useState(false); const inputRef=useRef(null);
+  const { state }=useData(); const navigate=useNavigate(); const [params]=useSearchParams();
+  const [query,setQuery]=useState(()=>params.get("q")||"220uf 25v"); const [selectedIndex,setSelectedIndex]=useState(0); const [showLocator,setShowLocator]=useState(true); const [scanOpen,setScanOpen]=useState(false); const inputRef=useRef(null);
   const products=useMemo(()=>state.products.map(product=>({product,score:scoreProduct(product,query)})).filter(item=>item.score>0).sort((a,b)=>b.score-a.score).map(item=>item.product),[state.products,query]);
   const selected=products[Math.min(selectedIndex,products.length-1)];
   useEffect(()=>setSelectedIndex(0),[query]);

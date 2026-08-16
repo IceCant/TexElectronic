@@ -1,0 +1,23 @@
+{
+  "id": "/store",
+  "name": "Tex Electronic Shop",
+  "short_name": "Tex Shop",
+  "description": "Browse Tex Electronic products, availability and online orders.",
+  "start_url": "/store",
+  "scope": "/store",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#11161b",
+  "theme_color": "#11161b",
+  "categories": ["shopping", "business"],
+  "shortcuts": [
+    { "name": "Browse products", "short_name": "Products", "url": "/store" },
+    { "name": "Shopping cart", "short_name": "Cart", "url": "/store/cart" },
+    { "name": "Track an order", "short_name": "Track order", "url": "/store/track" }
+  ],
+  "icons": [
+    { "src": "/icons/shop-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/shop-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/shop-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -11,13 +11,14 @@
     "db:reset": "node server/reset.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "test": "node --test tests/domain.test.mjs tests/sites-worker.test.mjs tests/vercel-api.test.mjs",
+    "test": "node --test tests/domain.test.mjs tests/pwa.test.mjs tests/sites-worker.test.mjs tests/vercel-api.test.mjs",
     "test:sites": "node --test tests/sites-worker.test.mjs",
     "check": "npm run typecheck && npm run lint && npm test && npm run build"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
     "@vitejs/plugin-react": "5.0.4",
+    "@zxing/browser": "^0.2.1",
     "better-sqlite3": "^13.0.3",
     "bwip-js": "^4.11.2",
     "react": "19.2.0",
